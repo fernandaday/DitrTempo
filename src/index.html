@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <title>Distribuição de Tempo</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    
+    <!-- CSS Bootstrap -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+      crossorigin="anonymous">      
+    
+    <!-- Bootstrap Icons -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" 
+      integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" 
+      crossorigin="anonymous">
+
+    <!-- css do projeto -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="primary-color text-center">Distribuição de Tempo</h1>
+
+      <div class="row mb-3">
+        <div class="col-md-2">
+          <div class="form-floating">  
+            <input
+              type="number"
+              class="form-control"
+              name="tempo-disponivel"
+              id="tempo-disponivel"
+              min="0"
+              max="99"
+              autocomplete="off"
+              step="5"
+            />
+            <label for="tempo-disponivel">Tempo Disp. (min)</label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-floating">  
+            <input
+              type="number"
+              class="form-control"
+              id="qtde-paragrafos"
+              min="0"
+              max="99"
+              autocomplete="off"
+            />
+            <label for="qtde-paragrafos">Qtde parágrafos</label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-floating">  
+            <input
+              type="time"
+              class="form-control"
+              id="hora-inicio"
+              autocomplete="off"
+            />
+            <label for="hora-inicio">Horário início</label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-check"> 
+            <input class="form-check-input" type="checkbox" value="" id="introducao" checked>
+            <label class="form-check-label" for="introducao">
+              Introdução
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-check"> 
+            <input class="form-check-input" type="checkbox" value="" id="conclusao" checked>
+            <label class="form-check-label" for="conclusao">
+              Conclusão
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <select class="form-select form-select-md mb-3" aria-label=".form-select-md recapitulacao" id="recapitulacao">
+            <option value="0">Recapitulação</option>
+            <option value="1">Uma pergunta</option>
+            <option value="2">Duas perguntas</option>
+            <option selected value="3">Três perguntas</option>
+          </select>
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="row mb-3 div-botoes-distribuir">
+      <div class="d-grid gap-2">    
+        <input type="reset" value="Limpar" class="btn btn-dark btn-lg" id="limpar"/>
+        <input type="submit" value="Distribuir" class="btn btn-dark btn-lg" id="distribuir"/>
+      </div>
+    </div>
+
+    <div class="row mb-3 div-paragrafos-distribuidos d-none border border-black" id="div-paragrafos-distribuidos">                  
+      <h4 class="primary-color text-center titulo-paragrafos-distribuidos">
+        Distribuição
+      </h4>
+    
+      <div class="primary-color" id="paragrafo">
+        <div class="row mb-3 paragrafo d-none template">
+          <div class="col-md-3">
+            <div class="form-floating">  
+              <input
+                type="text"
+                class="form-control numero-paragrafo"
+                id="numero-paragrafo"
+                autocomplete="off"
+              />
+              <label for="numero-paragrafo">Parágrafo</label>
+            </div>
+          </div>
+  
+          <div class="col-md-3">
+            <div class="form-floating">  
+              <input
+                type="number"
+                class="form-control tempo-paragrafo-minutos"
+                id="tempo-paragrafo-minutos"
+                min="0"
+                max="99"
+                autocomplete="off"
+              />
+              <label for="tempo-paragrafo-minutos">Tempo parágrafo (minutos)</label>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-floating">  
+              <input
+                type="number"
+                class="form-control tempo-paragrafo-segundos"
+                id="tempo-paragrafo-segundos"
+                min="0"
+                max="59"
+                autocomplete="off"
+                step="10"
+              />
+              <label for="tempo-paragrafo-segundos">Tempo parágrafo (segundos)</label>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-floating">  
+              <p class="hora-final-paragrafo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  <script src="js/scripts.js"></script>
+  <script src="js/moment.js"></script>
+  </body>
+</html>
