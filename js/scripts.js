@@ -24,11 +24,9 @@ distribuir.addEventListener("click", function () {
   if (recapitulacao.selectedIndex === 3) {tempoDisponivelSegundos = tempoDisponivelSegundos -270}
 
   tempoDisponivel = Math.trunc(tempoDisponivelSegundos / 60)
-  console.log(tempoDisponivel)
-  console.log(tempoDisponivelSegundos)
+  
   let sobraTempoDisponivelSegundos = tempoDisponivelSegundos - (tempoDisponivel * 60)
-  console.log(sobraTempoDisponivelSegundos)
-
+  
   let horaFimParagrafo = moment(document.getElementById("hora-inicio").value, "HH:mm:ss");
 
   let tempoMedioMin = Math.trunc(tempoDisponivel / qtdeParagrafos) 
@@ -124,3 +122,25 @@ function adicionaParagrafo(nuParagrafo, tempoMedioMin, tempoMedioSeg, horaFinalP
   paragrafoHoraFinalParagrafo.textContent = horaFinalParagrafo.format("HH:mm:ss")
 }
 
+const atualizar = document.querySelector("#atualizar")
+
+atualizar.addEventListener("click", function () {
+  let horaFimParagrafo = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
+  console.log(horaFimParagrafo)
+  const horaInicio = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
+  console.log(horaInicio)
+  const minutos = document.querySelectorAll(".tempo-paragrafo-minutos")
+  const segundos = document.querySelectorAll(".tempo-paragrafo-segundos")
+
+  for (let i = 0; i < minutos.length; i++) {
+    horaFimParagrafo = somaTempoParagrafo(horaFimParagrafo, minutos[i].value, segundos[i].value)
+    console.log(horaFimParagrafo)
+  }
+
+  console.log(horaInicio)
+  console.log(horaFimParagrafo)
+
+  let tempoDistribuido = document.getElementById("total-tempo-distribuido")
+  const tempoParte = moment(horaFimParagrafo - horaInicio, "HH:mm:ss")
+  tempoDistribuido.textContent = tempoParte.format("HH:mm:ss")
+})
