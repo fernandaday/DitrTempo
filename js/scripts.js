@@ -27,7 +27,7 @@ distribuir.addEventListener("click", function () {
   
   let sobraTempoDisponivelSegundos = tempoDisponivelSegundos - (tempoDisponivel * 60)
   
-  let horaFimParagrafo = moment(document.getElementById("hora-inicio").value, "HH:mm:ss");
+  let horaFimParagrafo = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
 
   let tempoMedioMin = Math.trunc(tempoDisponivel / qtdeParagrafos) 
   let tempoMedioSeg = tempoDisponivel - (tempoMedioMin * qtdeParagrafos)
@@ -119,28 +119,65 @@ function adicionaParagrafo(nuParagrafo, tempoMedioMin, tempoMedioSeg, horaFinalP
   inputTempoParagrafoSeg.value = tempoMedioSeg
 
   let paragrafoHoraFinalParagrafo = document.querySelector(".paragrafo" + nuParagrafo + " .hora-final-paragrafo")
-  paragrafoHoraFinalParagrafo.textContent = horaFinalParagrafo.format("HH:mm:ss")
+  paragrafoHoraFinalParagrafo.value = horaFinalParagrafo.format("HH:mm:ss")
 }
 
 const atualizar = document.querySelector("#atualizar")
 
 atualizar.addEventListener("click", function () {
-  let horaFimParagrafo = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
-  console.log(horaFimParagrafo)
+  let horaAdicionar = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
+  let horaFinalParagrafo = document.querySelectorAll(".hora-final-paragrafo")
+  
   const horaInicio = moment(document.getElementById("hora-inicio").value, "HH:mm:ss")
-  console.log(horaInicio)
   const minutos = document.querySelectorAll(".tempo-paragrafo-minutos")
   const segundos = document.querySelectorAll(".tempo-paragrafo-segundos")
 
   for (let i = 0; i < minutos.length; i++) {
-    horaFimParagrafo = somaTempoParagrafo(horaFimParagrafo, minutos[i].value, segundos[i].value)
-    console.log(horaFimParagrafo)
+    horaAdicionar = somaTempoParagrafo(horaAdicionar, minutos[i].value, segundos[i].value)
+    horaFinalParagrafo[i].value = horaAdicionar.format("HH:mm:ss")
+    horaFinalParagrafo[i].innerHTML = horaAdicionar.format("HH:mm:ss")
   }
 
-  console.log(horaInicio)
-  console.log(horaFimParagrafo)
-
+  // const tempoParte = moment(horaAdicionar, "HH:mm:ss")
+  const tempoParte = duracao(horaInicio.format("HH:mm:ss"), horaAdicionar.format("HH:mm:ss"));
+  
   let tempoDistribuido = document.getElementById("total-tempo-distribuido")
-  const tempoParte = moment(horaFimParagrafo - horaInicio, "HH:mm:ss")
-  tempoDistribuido.textContent = tempoParte.format("HH:mm:ss")
+  tempoDistribuido.textContent =
+    "Início: " + horaInicio.format("HH:mm:ss") + 
+    " Término: " + horaAdicionar.format("HH:mm:ss")  + 
+    " Tempo: " + tempoParte + " minutos"
 })
+
+const copiar = document.querySelector("#copiar")
+
+copiar.addEventListener("click", function () {
+  const paragrafo = document.querySelectorAll(".numero-paragrafo")
+  const horaFinalParagrafo = document.querySelectorAll(".hora-final-paragrafo")
+  
+  let copiaTempos = ""
+  
+  for (let i = 0; i < paragrafo.length; i++) {
+
+    if ((paragrafo[i].value != undefined) & (paragrafo[i].value != "")) {
+      console.log(paragrafo[i].value)
+      copiaTempos = copiaTempos + 
+        paragrafo[i].value + " " + horaFinalParagrafo[i].value + "\n"
+    }
+  }
+
+  navigator.clipboard.writeText(copiaTempos);
+
+  alert("Copiado para área de transferência");
+})
+
+function parse(horario) {
+  let [hora, minuto] = horario.split(':').map(v => parseInt(v));
+  if (!minuto) { // para o caso de não ter os minutos
+      minuto = 0;
+  }
+  return minuto + (hora * 60);
+}
+
+function duracao(inicio, fim) {
+  return (parse(fim) - parse(inicio));
+}

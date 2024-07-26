@@ -39,14 +39,16 @@ h1 {
   margin: 0.8em;
   padding: 1em;
 }
-
-.div-botoes-distribuir {
+ 
+.div-botoes-distribuir,
+.div-tempo-total {
   padding: 1em 2em;
   text-align: center;
 }
 
-.btn-distribuir {
-  width: 7em;
+.div-botoes-distribuir input,
+.div-tempo-total input {
+  width: 8em;
 }
 
 .titulo-paragrafos-distribuidos {
