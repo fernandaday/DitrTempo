@@ -35,6 +35,12 @@ h1 {
   padding: .3em .2em;
 }
 
+#recapitulacao,
+.form-check {
+  margin-top: 1em;
+  margin-left: .2em;
+}
+
 .div-tempo-total{
   margin: 0.8em;
   padding: 1em;
@@ -42,11 +48,13 @@ h1 {
  
 .div-botoes-distribuir,
 .div-tempo-total {
-  padding: 1em 2em;
   text-align: center;
 }
 
-.div-botoes-distribuir input,
+.div-botoes-distribuir input {
+  width: 7em;
+}
+
 .div-tempo-total input {
   width: 8em;
 }
@@ -55,8 +63,10 @@ h1 {
   margin: .5em 0 .5em;
 } 
 
-.div-tempo-total {
-
+#total-tempo-distribuido {
+  margin-top: .5em;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .div-paragrafos-distribuidos {
@@ -69,4 +79,10 @@ h1 {
     margin: 1em 7.5em 2em 7.5em;
     padding: 1em;
   }  
+
+  #recapitulacao,
+    .form-check {
+      margin-top: .5em;
+  }
+
 }
